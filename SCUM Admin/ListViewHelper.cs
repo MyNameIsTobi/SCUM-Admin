@@ -3,14 +3,13 @@ using System.Drawing;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 
-
-
 namespace SCUM_Admin
 {
     class ListViewHelper
     {
         Color pastelRed = System.Drawing.ColorTranslator.FromHtml("#ff9994");
 
+        //Creates headers for tables
         public void CreateHeader(ListView listView, string[] headers)
         {
             foreach (var header in headers)
@@ -37,6 +36,7 @@ namespace SCUM_Admin
             listView.Columns[lastColumn].Width = -2;
         }
 
+        //opens mysql connection
         public MySqlConnection OpenSqlConnection()
         {
             MySqlConnection conn = new MySqlConnection(Properties.Settings.Default.connString);
@@ -47,11 +47,13 @@ namespace SCUM_Admin
             return conn;
         }
 
+        //closes mysql connection
         public void CloseSqlConnection(MySqlConnection mySqlConnection)
         {
             mySqlConnection.Close();
         }
 
+        //populates ranged list
         public void PopulateRagned(string table, MySqlConnection conn, ListView listView)
         {
             
