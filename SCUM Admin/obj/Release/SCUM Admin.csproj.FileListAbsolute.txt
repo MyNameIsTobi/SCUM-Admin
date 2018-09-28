@@ -1,0 +1,18 @@
+C:\Users\Tobi\source\repos\SCUM Admin\SCUM Admin\bin\Release\SCUM Admin.exe.config
+C:\Users\Tobi\source\repos\SCUM Admin\SCUM Admin\bin\Release\SCUM Admin.exe.manifest
+C:\Users\Tobi\source\repos\SCUM Admin\SCUM Admin\bin\Release\SCUM Admin.application
+C:\Users\Tobi\source\repos\SCUM Admin\SCUM Admin\bin\Release\SCUM Admin.exe
+C:\Users\Tobi\source\repos\SCUM Admin\SCUM Admin\bin\Release\SCUM Admin.pdb
+C:\Users\Tobi\source\repos\SCUM Admin\SCUM Admin\bin\Release\MySql.Data.dll
+C:\Users\Tobi\source\repos\SCUM Admin\SCUM Admin\bin\Release\Google.Protobuf.dll
+C:\Users\Tobi\source\repos\SCUM Admin\SCUM Admin\bin\Release\MySql.Data.xml
+C:\Users\Tobi\source\repos\SCUM Admin\SCUM Admin\obj\Release\SCUM_Admin.scumAdmin.resources
+C:\Users\Tobi\source\repos\SCUM Admin\SCUM Admin\obj\Release\SCUM_Admin.Properties.Resources.resources
+C:\Users\Tobi\source\repos\SCUM Admin\SCUM Admin\obj\Release\SCUM Admin.csproj.GenerateResource.cache
+C:\Users\Tobi\source\repos\SCUM Admin\SCUM Admin\obj\Release\SCUM Admin.csproj.CoreCompileInputs.cache
+C:\Users\Tobi\source\repos\SCUM Admin\SCUM Admin\obj\Release\SCUM Admin.TrustInfo.xml
+C:\Users\Tobi\source\repos\SCUM Admin\SCUM Admin\obj\Release\SCUM Admin.exe.manifest
+C:\Users\Tobi\source\repos\SCUM Admin\SCUM Admin\obj\Release\SCUM Admin.application
+C:\Users\Tobi\source\repos\SCUM Admin\SCUM Admin\obj\Release\SCUM Admin.csproj.CopyComplete
+C:\Users\Tobi\source\repos\SCUM Admin\SCUM Admin\obj\Release\SCUM Admin.exe
+C:\Users\Tobi\source\repos\SCUM Admin\SCUM Admin\obj\Release\SCUM Admin.pdb
