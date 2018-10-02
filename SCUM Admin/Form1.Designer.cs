@@ -31,6 +31,8 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(scumAdmin));
             this.mainTabs = new System.Windows.Forms.TabControl();
             this.spawntable = new System.Windows.Forms.TabPage();
+            this.searchItemLabel = new System.Windows.Forms.Label();
+            this.searchItemTextBox = new System.Windows.Forms.TextBox();
             this.spawnButton = new System.Windows.Forms.Button();
             this.amount = new System.Windows.Forms.TextBox();
             this.itemsTab = new System.Windows.Forms.TabControl();
@@ -80,8 +82,13 @@
             this.teleportLocationsList = new System.Windows.Forms.ListView();
             this.teleportToLocationButton = new System.Windows.Forms.Button();
             this.settings = new System.Windows.Forms.TabPage();
+            this.switchBackToAppCB = new System.Windows.Forms.CheckBox();
+            this.hideIngameUsableCB = new System.Windows.Forms.CheckBox();
+            this.hideIngameSpawnableCB = new System.Windows.Forms.CheckBox();
+            this.hideIngameAvailableCB = new System.Windows.Forms.CheckBox();
             this.steamId64 = new System.Windows.Forms.Label();
             this.steamIdTextBox = new System.Windows.Forms.TextBox();
+            this.VersionLabel = new System.Windows.Forms.Label();
             this.mainTabs.SuspendLayout();
             this.spawntable.SuspendLayout();
             this.itemsTab.SuspendLayout();
@@ -126,6 +133,8 @@
             // 
             // spawntable
             // 
+            this.spawntable.Controls.Add(this.searchItemLabel);
+            this.spawntable.Controls.Add(this.searchItemTextBox);
             this.spawntable.Controls.Add(this.spawnButton);
             this.spawntable.Controls.Add(this.amount);
             this.spawntable.Controls.Add(this.itemsTab);
@@ -136,6 +145,24 @@
             this.spawntable.TabIndex = 0;
             this.spawntable.Text = "Spawntable";
             this.spawntable.UseVisualStyleBackColor = true;
+            // 
+            // searchItemLabel
+            // 
+            this.searchItemLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.searchItemLabel.AutoSize = true;
+            this.searchItemLabel.Location = new System.Drawing.Point(800, 512);
+            this.searchItemLabel.Name = "searchItemLabel";
+            this.searchItemLabel.Size = new System.Drawing.Size(66, 13);
+            this.searchItemLabel.TabIndex = 4;
+            this.searchItemLabel.Text = "Search item:";
+            // 
+            // searchItemTextBox
+            // 
+            this.searchItemTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.searchItemTextBox.Location = new System.Drawing.Point(872, 509);
+            this.searchItemTextBox.Name = "searchItemTextBox";
+            this.searchItemTextBox.Size = new System.Drawing.Size(248, 20);
+            this.searchItemTextBox.TabIndex = 3;
             // 
             // spawnButton
             // 
@@ -726,6 +753,11 @@
             // 
             // settings
             // 
+            this.settings.Controls.Add(this.VersionLabel);
+            this.settings.Controls.Add(this.switchBackToAppCB);
+            this.settings.Controls.Add(this.hideIngameUsableCB);
+            this.settings.Controls.Add(this.hideIngameSpawnableCB);
+            this.settings.Controls.Add(this.hideIngameAvailableCB);
             this.settings.Controls.Add(this.steamId64);
             this.settings.Controls.Add(this.steamIdTextBox);
             this.settings.Location = new System.Drawing.Point(4, 4);
@@ -734,6 +766,46 @@
             this.settings.TabIndex = 2;
             this.settings.Text = "Settings";
             this.settings.UseVisualStyleBackColor = true;
+            // 
+            // switchBackToAppCB
+            // 
+            this.switchBackToAppCB.AutoSize = true;
+            this.switchBackToAppCB.Location = new System.Drawing.Point(12, 103);
+            this.switchBackToAppCB.Name = "switchBackToAppCB";
+            this.switchBackToAppCB.Size = new System.Drawing.Size(219, 17);
+            this.switchBackToAppCB.TabIndex = 5;
+            this.switchBackToAppCB.Text = "Switch back to SCUM Admin after action";
+            this.switchBackToAppCB.UseVisualStyleBackColor = true;
+            // 
+            // hideIngameUsableCB
+            // 
+            this.hideIngameUsableCB.AutoSize = true;
+            this.hideIngameUsableCB.Location = new System.Drawing.Point(12, 57);
+            this.hideIngameUsableCB.Name = "hideIngameUsableCB";
+            this.hideIngameUsableCB.Size = new System.Drawing.Size(147, 17);
+            this.hideIngameUsableCB.TabIndex = 4;
+            this.hideIngameUsableCB.Text = "Hide ingame usable Items";
+            this.hideIngameUsableCB.UseVisualStyleBackColor = true;
+            // 
+            // hideIngameSpawnableCB
+            // 
+            this.hideIngameSpawnableCB.AutoSize = true;
+            this.hideIngameSpawnableCB.Location = new System.Drawing.Point(12, 34);
+            this.hideIngameSpawnableCB.Name = "hideIngameSpawnableCB";
+            this.hideIngameSpawnableCB.Size = new System.Drawing.Size(166, 17);
+            this.hideIngameSpawnableCB.TabIndex = 3;
+            this.hideIngameSpawnableCB.Text = "Hide ingame spawnable items";
+            this.hideIngameSpawnableCB.UseVisualStyleBackColor = true;
+            // 
+            // hideIngameAvailableCB
+            // 
+            this.hideIngameAvailableCB.AutoSize = true;
+            this.hideIngameAvailableCB.Location = new System.Drawing.Point(12, 80);
+            this.hideIngameAvailableCB.Name = "hideIngameAvailableCB";
+            this.hideIngameAvailableCB.Size = new System.Drawing.Size(157, 17);
+            this.hideIngameAvailableCB.TabIndex = 2;
+            this.hideIngameAvailableCB.Text = "Hide ingame available items";
+            this.hideIngameAvailableCB.UseVisualStyleBackColor = true;
             // 
             // steamId64
             // 
@@ -750,8 +822,16 @@
             this.steamIdTextBox.Name = "steamIdTextBox";
             this.steamIdTextBox.Size = new System.Drawing.Size(121, 20);
             this.steamIdTextBox.TabIndex = 0;
-            this.steamIdTextBox.TextChanged += new System.EventHandler(this.steamIdTextBox_TextChanged);
             this.steamIdTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.steamIdTextBoxt_KeyPress);
+            // 
+            // VersionLabel
+            // 
+            this.VersionLabel.AutoSize = true;
+            this.VersionLabel.Location = new System.Drawing.Point(4, 519);
+            this.VersionLabel.Name = "VersionLabel";
+            this.VersionLabel.Size = new System.Drawing.Size(31, 13);
+            this.VersionLabel.TabIndex = 6;
+            this.VersionLabel.Text = "1337";
             // 
             // scumAdmin
             // 
@@ -763,6 +843,8 @@
             this.MinimumSize = new System.Drawing.Size(1150, 600);
             this.Name = "scumAdmin";
             this.Text = "SCUM Admin";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.scumAdmin_FormClosing);
+            this.Load += new System.EventHandler(this.scumAdmin_Load);
             this.mainTabs.ResumeLayout(false);
             this.spawntable.ResumeLayout(false);
             this.spawntable.PerformLayout();
@@ -850,6 +932,13 @@
         private System.Windows.Forms.Button teleportToLocationButton;
         private System.Windows.Forms.Label steamId64;
         private System.Windows.Forms.TextBox steamIdTextBox;
+        private System.Windows.Forms.CheckBox hideIngameAvailableCB;
+        private System.Windows.Forms.CheckBox hideIngameSpawnableCB;
+        private System.Windows.Forms.CheckBox hideIngameUsableCB;
+        private System.Windows.Forms.CheckBox switchBackToAppCB;
+        private System.Windows.Forms.TextBox searchItemTextBox;
+        private System.Windows.Forms.Label searchItemLabel;
+        private System.Windows.Forms.Label VersionLabel;
     }
 }
 

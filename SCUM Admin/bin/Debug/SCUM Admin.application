@@ -7,14 +7,14 @@
     <framework targetVersion="4.6.1" profile="Full" supportedRuntime="4.0.30319" />
   </compatibleFrameworks>
   <dependency>
-    <dependentAssembly dependencyType="install" codebase="SCUM Admin.exe.manifest" size="6526">
+    <dependentAssembly dependencyType="install" codebase="SCUM Admin.exe.manifest" size="7157">
       <assemblyIdentity name="SCUM Admin.exe" version="0.0.1.1" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="msil" type="win32" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>pDLP33D3ZhsgxzNVNJkdqNMXHmzlIh8PU9CroddJ0Lw=</dsig:DigestValue>
+        <dsig:DigestValue>J+n73jkcmHbZ8ruLGuRDJKupP2YyphzInB0wL45avQo=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

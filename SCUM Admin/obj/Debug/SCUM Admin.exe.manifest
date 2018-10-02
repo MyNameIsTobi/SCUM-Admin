@@ -67,14 +67,26 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="SCUM Admin.exe" size="460760">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="SCUM Admin.exe" size="463320">
       <assemblyIdentity name="SCUM Admin" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>CbnvdXpQNx6MDIPMCwoZ0mZS1tKcELS6loyP5vxRVnQ=</dsig:DigestValue>
+        <dsig:DigestValue>kYCkNOCH4VfsfXyPd0AsxrLlnCB0XlJ0zetLQnpwaFk=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="update.dll" size="988160">
+      <assemblyIdentity name="update" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>sOZvWfj/54bW4MxRsNrvprXOv0oCFV3vB9TgXzU4dtc=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

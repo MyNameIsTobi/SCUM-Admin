@@ -1,0 +1,9 @@
+C:\Users\Tobi\Documents\C#\SCUM Admin\SCUM Admin\update\bin\Debug\update.dll
+C:\Users\Tobi\Documents\C#\SCUM Admin\SCUM Admin\update\bin\Debug\update.pdb
+C:\Users\Tobi\Documents\C#\SCUM Admin\SCUM Admin\update\obj\Debug\update.csprojAssemblyReference.cache
+C:\Users\Tobi\Documents\C#\SCUM Admin\SCUM Admin\update\obj\Debug\update.csproj.CoreCompileInputs.cache
+C:\Users\Tobi\Documents\C#\SCUM Admin\SCUM Admin\update\obj\Debug\update.dll
+C:\Users\Tobi\Documents\C#\SCUM Admin\SCUM Admin\update\obj\Debug\update.pdb
+C:\Users\Tobi\Documents\C#\SCUM Admin\SCUM Admin\update\obj\Debug\update.Properties.Resources.resources
+C:\Users\Tobi\Documents\C#\SCUM Admin\SCUM Admin\update\obj\Debug\update.UpdateInfoForm.resources
+C:\Users\Tobi\Documents\C#\SCUM Admin\SCUM Admin\update\obj\Debug\update.csproj.GenerateResource.cache

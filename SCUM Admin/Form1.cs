@@ -1,84 +1,51 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
+using System.Drawing;
+using System.Reflection;
 using System.Windows.Forms;
+using update;
 
 namespace SCUM_Admin
 {
-    public partial class scumAdmin : Form
+    public partial class scumAdmin : Form, Updateable
     {
         ListViewHelper lvh = new ListViewHelper();
         ProcessHandler hndlr = new ProcessHandler();
 
+        public string ApplicationName
+        {
+            get { return "SCUM Admin"; }
+        }
+
+        public string ApplicationID
+        {
+            get { return "SCUM Admin"; }
+        }
+
+        public Assembly ApplicationAssembly
+        {
+            get { return Assembly.GetExecutingAssembly(); }
+        }
+
+        public Icon ApplicationIcon
+        {
+            get { return this.Icon; }
+        }
+
+        public Uri UpdateXmlLocation
+        {
+            get { return new Uri(""); }
+        }
+
+        public Form Context
+        {
+            get { return this; }
+        }
+
         public scumAdmin()
         {
             InitializeComponent();
-            steamIdTextBox.Text = Properties.Settings.Default.steamId64;
-            MySqlConnection mySqlConnection = lvh.OpenSqlConnection();
-
-            lvh.CreateHeader(rangedList, new string[] { "Display Name", "Caliber", "Hands", "Ingame Spawnable", "Ingame Available", "Spawn Name" });
-            lvh.PopulateRagned("ranged", mySqlConnection, rangedList);
-
-            lvh.CreateHeader(meleeList, new string[] { "Display Name", "Caliber", "Hands", "Ingame Spawnable", "Ingame Available", "Spawn Name" });
-            lvh.PopulateRagned("melee", mySqlConnection, meleeList);
-
-            lvh.CreateHeader(weaponpartsList, new string[] { "Display Name", "Ingame Spawnable", "Ingame Available", "Spawn Name" });
-            lvh.PopulateSmallLists("weaponparts", mySqlConnection, weaponpartsList);
-
-            lvh.CreateHeader(ammoList, new string[] { "Display Name", "Caliber", "Amount", "Ingame Spawnable", "Ingame Available", "Spawn Name" });
-            lvh.PopulateAmmo("ammo", mySqlConnection, ammoList);
-
-            lvh.CreateHeader(headgearList, new string[] { "Display Name", "Color", "Cwamouflage", "Ingame Spawnable", "Ingame Available", "Spawn Name" });
-            lvh.PopulateGear("headgear", mySqlConnection, headgearList);
-
-            lvh.CreateHeader(topsList, new string[] { "Display Name", "Color", "Cwamouflage", "Ingame Spawnable", "Ingame Available", "Spawn Name" });
-            lvh.PopulateGear("tops", mySqlConnection, topsList);
-
-            lvh.CreateHeader(pantsList, new string[] { "Display Name", "Color", "Cwamouflage", "Ingame Spawnable", "Ingame Available", "Spawn Name" });
-            lvh.PopulateGear("pants", mySqlConnection, pantsList);
-
-            lvh.CreateHeader(shoesList, new string[] { "Display Name", "Color", "Cwamouflage", "Ingame Spawnable", "Ingame Available", "Spawn Name" });
-            lvh.PopulateGear("shoes", mySqlConnection, shoesList);
-
-            lvh.CreateHeader(backpacksList, new string[] { "Display Name", "Color", "Cwamouflage", "Ingame Spawnable", "Ingame Available", "Spawn Name" });
-            lvh.PopulateGear("backpacks", mySqlConnection, backpacksList);
-
-            lvh.CreateHeader(vestsList, new string[] { "Display Name", "Color", "Cwamouflage", "Ingame Spawnable", "Ingame Available", "Spawn Name" });
-            lvh.PopulateGear("vests", mySqlConnection, vestsList);
-
-            lvh.CreateHeader(miscGearList, new string[] { "Display Name", "Color", "Cwamouflage", "Ingame Spawnable", "Ingame Available", "Spawn Name" });
-            lvh.PopulateGear("miscgear", mySqlConnection, miscGearList);
-
-            lvh.CreateHeader(toolsList, new string[] { "Display Name", "Ingame Spawnable", "Ingame Available", "Spawn Name" });
-            lvh.PopulateSmallLists("tools", mySqlConnection, toolsList);
-
-            lvh.CreateHeader(craftingList, new string[] { "Display Name", "Ingame Spawnable", "Ingame Available", "Spawn Name" });
-            lvh.PopulateSmallLists("crafting", mySqlConnection, craftingList);
-
-            lvh.CreateHeader(foodList, new string[] { "Display Name", "Toxic", "Amount", "Ingame Spawnable", "Ingame Available", "Spawn Name" });
-            lvh.PopulateFood("food", mySqlConnection, foodList);
-
-            lvh.CreateHeader(drinksList, new string[] { "Display Name", "Alcoholic", "Amount", "Ingame Spawnable", "Ingame Available", "Spawn Name" });
-            lvh.PopulateDrinks("drinks", mySqlConnection, drinksList);
-
-            lvh.CreateHeader(drugstoreList, new string[] { "Display Name", "Amount", "Ingame Spawnable", "Ingame Available", "Spawn Name" });
-            lvh.PopulateDrugstore("drugstore", mySqlConnection, drugstoreList);
-
-            lvh.CreateHeader(npcList, new string[] { "Display Name", "Ingame Spawnable", "Ingame Available", "Spawn Name" });
-            lvh.PopulateSmallLists("npcs", mySqlConnection, npcList);
-
-            lvh.CreateHeader(npcPartsList, new string[] { "Display Name", "Ingame Spawnable", "Ingame Available", "Spawn Name" });
-            lvh.PopulateSmallLists("npcparts", mySqlConnection, npcPartsList);
-
-            lvh.CreateHeader(envList, new string[] { "Display Name", "Ingame Spawnable", "Ingame Available", "Spawn Name" });
-            lvh.PopulateSmallLists("environment", mySqlConnection, envList);
-
-            lvh.CreateHeader(miscList, new string[] { "Display Name", "Ingame Spawnable", "Ingame Available", "Spawn Name" });
-            lvh.PopulateSmallLists("misc", mySqlConnection, miscList);
-
-            lvh.CreateHeader(teleportLocationsList, new string[] { "Location Name", "Sector", "x", "y", "z" });
-            lvh.PopulateTeleportLocations("teleport_locations", mySqlConnection, teleportLocationsList);
-
-            lvh.CloseSqlConnection(mySqlConnection);
+            VersionLabel.Text = ApplicationAssembly.GetName().Version.ToString();
         }
 
         private void spawnButton_Click(object sender, EventArgs e)
@@ -272,18 +239,9 @@ namespace SCUM_Admin
 
         private void steamIdTextBoxt_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsDigit(e.KeyChar) || steamIdTextBox.Text.Length >= 17 )
+            if ( steamIdTextBox.Text.Length >= 17 )
             {
                 e.Handled = true;
-            }
-        }
-
-        private void steamIdTextBox_TextChanged(object sender, EventArgs e)
-        {
-            if (steamIdTextBox.Text.Length == 17)
-            {
-                Properties.Settings.Default.steamId64 = steamIdTextBox.Text;
-                Properties.Settings.Default.Save();
             }
         }
 
@@ -311,6 +269,83 @@ namespace SCUM_Admin
                 return;
 
             hndlr.Teleport(steamID, x.Replace(',', '.'), y.Replace(',', '.'), z.Replace(',', '.'));
+        }
+
+        private void scumAdmin_Load(object sender, EventArgs e)
+        {
+            steamIdTextBox.Text = Properties.Settings.Default.steamId64;
+            MySqlConnection mySqlConnection = lvh.OpenSqlConnection();
+
+            lvh.CreateHeader(rangedList, new string[] { "Display Name", "Caliber", "Hands", "Ingame Spawnable", "Ingame Available", "Spawn Name" });
+            lvh.PopulateRagned("ranged", mySqlConnection, rangedList);
+
+            lvh.CreateHeader(meleeList, new string[] { "Display Name", "Caliber", "Hands", "Ingame Spawnable", "Ingame Available", "Spawn Name" });
+            lvh.PopulateRagned("melee", mySqlConnection, meleeList);
+
+            lvh.CreateHeader(weaponpartsList, new string[] { "Display Name", "Ingame Spawnable", "Ingame Available", "Spawn Name" });
+            lvh.PopulateSmallLists("weaponparts", mySqlConnection, weaponpartsList);
+
+            lvh.CreateHeader(ammoList, new string[] { "Display Name", "Caliber", "Amount", "Ingame Spawnable", "Ingame Available", "Spawn Name" });
+            lvh.PopulateAmmo("ammo", mySqlConnection, ammoList);
+
+            lvh.CreateHeader(headgearList, new string[] { "Display Name", "Color", "Cwamouflage", "Ingame Spawnable", "Ingame Available", "Spawn Name" });
+            lvh.PopulateGear("headgear", mySqlConnection, headgearList);
+
+            lvh.CreateHeader(topsList, new string[] { "Display Name", "Color", "Cwamouflage", "Ingame Spawnable", "Ingame Available", "Spawn Name" });
+            lvh.PopulateGear("tops", mySqlConnection, topsList);
+
+            lvh.CreateHeader(pantsList, new string[] { "Display Name", "Color", "Cwamouflage", "Ingame Spawnable", "Ingame Available", "Spawn Name" });
+            lvh.PopulateGear("pants", mySqlConnection, pantsList);
+
+            lvh.CreateHeader(shoesList, new string[] { "Display Name", "Color", "Cwamouflage", "Ingame Spawnable", "Ingame Available", "Spawn Name" });
+            lvh.PopulateGear("shoes", mySqlConnection, shoesList);
+
+            lvh.CreateHeader(backpacksList, new string[] { "Display Name", "Color", "Cwamouflage", "Ingame Spawnable", "Ingame Available", "Spawn Name" });
+            lvh.PopulateGear("backpacks", mySqlConnection, backpacksList);
+
+            lvh.CreateHeader(vestsList, new string[] { "Display Name", "Color", "Cwamouflage", "Ingame Spawnable", "Ingame Available", "Spawn Name" });
+            lvh.PopulateGear("vests", mySqlConnection, vestsList);
+
+            lvh.CreateHeader(miscGearList, new string[] { "Display Name", "Color", "Cwamouflage", "Ingame Spawnable", "Ingame Available", "Spawn Name" });
+            lvh.PopulateGear("miscgear", mySqlConnection, miscGearList);
+
+            lvh.CreateHeader(toolsList, new string[] { "Display Name", "Ingame Spawnable", "Ingame Available", "Spawn Name" });
+            lvh.PopulateSmallLists("tools", mySqlConnection, toolsList);
+
+            lvh.CreateHeader(craftingList, new string[] { "Display Name", "Ingame Spawnable", "Ingame Available", "Spawn Name" });
+            lvh.PopulateSmallLists("crafting", mySqlConnection, craftingList);
+
+            lvh.CreateHeader(foodList, new string[] { "Display Name", "Toxic", "Amount", "Ingame Spawnable", "Ingame Available", "Spawn Name" });
+            lvh.PopulateFood("food", mySqlConnection, foodList);
+
+            lvh.CreateHeader(drinksList, new string[] { "Display Name", "Alcoholic", "Amount", "Ingame Spawnable", "Ingame Available", "Spawn Name" });
+            lvh.PopulateDrinks("drinks", mySqlConnection, drinksList);
+
+            lvh.CreateHeader(drugstoreList, new string[] { "Display Name", "Amount", "Ingame Spawnable", "Ingame Available", "Spawn Name" });
+            lvh.PopulateDrugstore("drugstore", mySqlConnection, drugstoreList);
+
+            lvh.CreateHeader(npcList, new string[] { "Display Name", "Ingame Spawnable", "Ingame Available", "Spawn Name" });
+            lvh.PopulateSmallLists("npcs", mySqlConnection, npcList);
+
+            lvh.CreateHeader(npcPartsList, new string[] { "Display Name", "Ingame Spawnable", "Ingame Available", "Spawn Name" });
+            lvh.PopulateSmallLists("npcparts", mySqlConnection, npcPartsList);
+
+            lvh.CreateHeader(envList, new string[] { "Display Name", "Ingame Spawnable", "Ingame Available", "Spawn Name" });
+            lvh.PopulateSmallLists("environment", mySqlConnection, envList);
+
+            lvh.CreateHeader(miscList, new string[] { "Display Name", "Ingame Spawnable", "Ingame Available", "Spawn Name" });
+            lvh.PopulateSmallLists("misc", mySqlConnection, miscList);
+
+            lvh.CreateHeader(teleportLocationsList, new string[] { "Location Name", "Sector", "x", "y", "z" });
+            lvh.PopulateTeleportLocations("teleport_locations", mySqlConnection, teleportLocationsList);
+
+            lvh.CloseSqlConnection(mySqlConnection);
+        }
+
+        private void scumAdmin_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Properties.Settings.Default.steamId64 = steamIdTextBox.Text;
+            Properties.Settings.Default.Save();
         }
     }
 }
