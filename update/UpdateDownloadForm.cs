@@ -1,19 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Reflection;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using System.Net;
-using System.Windows.Forms;
+using System.Runtime.InteropServices;
 
 namespace update
 {
-    public partial class UpdateDownloadForm : Form
+    internal partial class UpdateDownloadForm : Form
     {
         private WebClient webClient;
         private BackgroundWorker bgWorker;
@@ -24,7 +20,7 @@ namespace update
             get { return this.tempFile; }
         }
 
-        public UpdateDownloadForm( Uri locatin, string md5, Icon programIcon)
+        internal UpdateDownloadForm( Uri location, string md5, Icon programIcon)
         {
             InitializeComponent();
 
@@ -36,15 +32,22 @@ namespace update
             this.md5 = md5;
 
             webClient = new WebClient();
-            webClient.DownloadProgressChanged += WebClient_DownloadProgressChanged;
-            webClient.DownloadFileCompleted += WebClient_DownloadFileCompleted;
+            webClient.DownloadProgressChanged += new DownloadProgressChangedEventHandler(WebClient_DownloadProgressChanged);
+            webClient.DownloadFileCompleted += new AsyncCompletedEventHandler(WebClient_DownloadFileCompleted);
 
             bgWorker = new BackgroundWorker();
-            bgWorker.DoWork += BgWorker_DoWork;
-            bgWorker.RunWorkerCompleted += BgWorker_RunWorkerCompleted;
+            bgWorker.DoWork += new DoWorkEventHandler(BgWorker_DoWork);
+            bgWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(BgWorker_RunWorkerCompleted);
 
-            try { webClient.DownloadFileAsync(locatin, this.tempFile); }
-            catch { this.DialogResult = DialogResult.No; this.Close(); }
+            try
+            {
+                webClient.DownloadFileAsync(location, this.tempFile);
+            }
+            catch (Exception e)
+            {
+                this.DialogResult = DialogResult.No;
+                this.Close();
+            }
         }
 
         private void BgWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -59,14 +62,16 @@ namespace update
             string updateMd5 = ((string[])e.Argument)[1];
 
             if (Hasher.HashFile(file, HashType.MD5) != updateMd5)
+            {
                 e.Result = DialogResult.No;
+            }
             else
                 e.Result = DialogResult.OK;
         }
 
         private void WebClient_DownloadFileCompleted(object sender, AsyncCompletedEventArgs e)
         {
-            if(e.Error != null)
+            if (e.Error != null)
             {
                 this.DialogResult = DialogResult.No;
                 this.Close();

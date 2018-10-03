@@ -140,6 +140,7 @@
     <ProjectReference Include="..\update\update.csproj">
       <Project>{e48ba4a5-b496-4e50-8311-008bb04e0c77}</Project>
       <Name>update</Name>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

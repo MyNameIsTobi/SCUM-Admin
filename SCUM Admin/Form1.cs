@@ -11,6 +11,7 @@ namespace SCUM_Admin
     {
         ListViewHelper lvh = new ListViewHelper();
         ProcessHandler hndlr = new ProcessHandler();
+        private Updater updater;
 
         public string ApplicationName
         {
@@ -19,7 +20,7 @@ namespace SCUM_Admin
 
         public string ApplicationID
         {
-            get { return "SCUM Admin"; }
+            get { return "SCUM_Admin"; }
         }
 
         public Assembly ApplicationAssembly
@@ -34,7 +35,7 @@ namespace SCUM_Admin
 
         public Uri UpdateXmlLocation
         {
-            get { return new Uri(""); }
+            get { return new Uri("http://scumadmin.rootgeek.org/update.xml"); }
         }
 
         public Form Context
@@ -45,6 +46,8 @@ namespace SCUM_Admin
         public scumAdmin()
         {
             InitializeComponent();
+            updater = new Updater(this);
+            updater.DoUpdate();
             VersionLabel.Text = ApplicationAssembly.GetName().Version.ToString();
         }
 

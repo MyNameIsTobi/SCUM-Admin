@@ -82,13 +82,13 @@
             this.teleportLocationsList = new System.Windows.Forms.ListView();
             this.teleportToLocationButton = new System.Windows.Forms.Button();
             this.settings = new System.Windows.Forms.TabPage();
+            this.VersionLabel = new System.Windows.Forms.Label();
             this.switchBackToAppCB = new System.Windows.Forms.CheckBox();
             this.hideIngameUsableCB = new System.Windows.Forms.CheckBox();
             this.hideIngameSpawnableCB = new System.Windows.Forms.CheckBox();
             this.hideIngameAvailableCB = new System.Windows.Forms.CheckBox();
             this.steamId64 = new System.Windows.Forms.Label();
             this.steamIdTextBox = new System.Windows.Forms.TextBox();
-            this.VersionLabel = new System.Windows.Forms.Label();
             this.mainTabs.SuspendLayout();
             this.spawntable.SuspendLayout();
             this.itemsTab.SuspendLayout();
@@ -767,6 +767,15 @@
             this.settings.Text = "Settings";
             this.settings.UseVisualStyleBackColor = true;
             // 
+            // VersionLabel
+            // 
+            this.VersionLabel.AutoSize = true;
+            this.VersionLabel.Location = new System.Drawing.Point(4, 519);
+            this.VersionLabel.Name = "VersionLabel";
+            this.VersionLabel.Size = new System.Drawing.Size(31, 13);
+            this.VersionLabel.TabIndex = 6;
+            this.VersionLabel.Text = "1337";
+            // 
             // switchBackToAppCB
             // 
             this.switchBackToAppCB.AutoSize = true;
@@ -823,15 +832,6 @@
             this.steamIdTextBox.Size = new System.Drawing.Size(121, 20);
             this.steamIdTextBox.TabIndex = 0;
             this.steamIdTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.steamIdTextBoxt_KeyPress);
-            // 
-            // VersionLabel
-            // 
-            this.VersionLabel.AutoSize = true;
-            this.VersionLabel.Location = new System.Drawing.Point(4, 519);
-            this.VersionLabel.Name = "VersionLabel";
-            this.VersionLabel.Size = new System.Drawing.Size(31, 13);
-            this.VersionLabel.TabIndex = 6;
-            this.VersionLabel.Text = "1337";
             // 
             // scumAdmin
             // 

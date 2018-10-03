@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Net;
 using System.Xml;
+using System.Windows.Forms;
 
 namespace update
 {
@@ -95,17 +96,17 @@ namespace update
 
                 version = Version.Parse(node["version"].InnerText);
                 url = node["url"].InnerText;
-                fileName = node["fileName"].InnerText;
+                fileName = node["filename"].InnerText;
                 md5 = node["md5"].InnerText;
                 description = node["description"].InnerText;
                 launchArgs = node["launchArgs"].InnerText;
 
                 return new UpdateXML(version, new Uri(url), fileName, md5, description, launchArgs);
             }
-            catch (Exception)
+            catch (Exception e)
             {
-
-                throw;
+                MessageBox.Show(e.Message);
+                return null;
             }
         }
     }

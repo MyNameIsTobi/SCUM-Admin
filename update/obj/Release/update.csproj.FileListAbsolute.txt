@@ -1,0 +1,10 @@
+C:\Users\Tobi\Documents\C#\SCUM Admin\SCUM Admin\update\bin\Release\update.dll
+C:\Users\Tobi\Documents\C#\SCUM Admin\SCUM Admin\update\bin\Release\update.pdb
+C:\Users\Tobi\Documents\C#\SCUM Admin\SCUM Admin\update\obj\Release\update.Properties.Resources.resources
+C:\Users\Tobi\Documents\C#\SCUM Admin\SCUM Admin\update\obj\Release\update.UpdateAcceptForm.resources
+C:\Users\Tobi\Documents\C#\SCUM Admin\SCUM Admin\update\obj\Release\update.UpdateDownloadForm.resources
+C:\Users\Tobi\Documents\C#\SCUM Admin\SCUM Admin\update\obj\Release\update.UpdateInfoForm.resources
+C:\Users\Tobi\Documents\C#\SCUM Admin\SCUM Admin\update\obj\Release\update.csproj.GenerateResource.cache
+C:\Users\Tobi\Documents\C#\SCUM Admin\SCUM Admin\update\obj\Release\update.csproj.CoreCompileInputs.cache
+C:\Users\Tobi\Documents\C#\SCUM Admin\SCUM Admin\update\obj\Release\update.dll
+C:\Users\Tobi\Documents\C#\SCUM Admin\SCUM Admin\update\obj\Release\update.pdb

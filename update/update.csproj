@@ -51,6 +51,12 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Updateable.cs" />
+    <Compile Include="UpdateAcceptForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UpdateAcceptForm.Designer.cs">
+      <DependentUpon>UpdateAcceptForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="UpdateDownloadForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -63,12 +69,16 @@
     <Compile Include="UpdateInfoForm.Designer.cs">
       <DependentUpon>UpdateInfoForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Updater.cs" />
     <Compile Include="UpdateXML.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UpdateAcceptForm.resx">
+      <DependentUpon>UpdateAcceptForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UpdateDownloadForm.resx">
       <DependentUpon>UpdateDownloadForm.cs</DependentUpon>

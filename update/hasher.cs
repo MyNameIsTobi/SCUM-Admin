@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Text;
 using System.IO;
 using System.Security.Cryptography;
-using System.Text;
+using System;
 
 namespace update
 {
@@ -36,10 +32,11 @@ namespace update
         private static string MakeHashString(byte[] hash)
         {
             StringBuilder s = new StringBuilder(hash.Length * 2);
-
+            
             foreach (byte b in hash)
                 s.Append(b.ToString("X2").ToLower());
 
+            Console.WriteLine(s);
             return s.ToString();
         }
     }
