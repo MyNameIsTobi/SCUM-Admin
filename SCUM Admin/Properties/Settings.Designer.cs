@@ -44,5 +44,65 @@ namespace SCUM_Admin.Properties {
                 this["steamId64"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool setAmountBack {
+            get {
+                return ((bool)(this["setAmountBack"]));
+            }
+            set {
+                this["setAmountBack"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool switchBack {
+            get {
+                return ((bool)(this["switchBack"]));
+            }
+            set {
+                this["switchBack"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool hideSpawnable {
+            get {
+                return ((bool)(this["hideSpawnable"]));
+            }
+            set {
+                this["hideSpawnable"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool hideUsable {
+            get {
+                return ((bool)(this["hideUsable"]));
+            }
+            set {
+                this["hideUsable"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool hideAvailable {
+            get {
+                return ((bool)(this["hideAvailable"]));
+            }
+            set {
+                this["hideAvailable"] = value;
+            }
+        }
     }
 }

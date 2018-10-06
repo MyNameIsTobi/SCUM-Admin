@@ -67,14 +67,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="SCUM Admin.exe" size="461272">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="SCUM Admin.exe" size="493528">
       <assemblyIdentity name="SCUM Admin" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>tBp6TEzrcJXdnTWIqeWjEVhC6J8pPCLh6malRQfpp8c=</dsig:DigestValue>
+        <dsig:DigestValue>oG+mYpqhCme/q9rWEJVn7bQrL5zpFfwAL7VJG/PC4VA=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -90,13 +90,13 @@
       </hash>
     </dependentAssembly>
   </dependency>
-  <file name="SCUM Admin.exe.config" size="1707">
+  <file name="SCUM Admin.exe.config" size="2334">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>19hvBpBWLKxsEvnTqUHA8qOCnX6KXnHlXf0aSaOLSBE=</dsig:DigestValue>
+      <dsig:DigestValue>Pd1qkfdxg7n6Rnuyh7WL29Jme73mX8iXmZp77A+1z9M=</dsig:DigestValue>
     </hash>
   </file>
   <file name="scumicon.ico" size="212336">

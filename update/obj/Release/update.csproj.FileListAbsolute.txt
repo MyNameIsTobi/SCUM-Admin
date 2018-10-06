@@ -8,3 +8,4 @@ C:\Users\Tobi\Documents\C#\SCUM Admin\SCUM Admin\update\obj\Release\update.cspro
 C:\Users\Tobi\Documents\C#\SCUM Admin\SCUM Admin\update\obj\Release\update.csproj.CoreCompileInputs.cache
 C:\Users\Tobi\Documents\C#\SCUM Admin\SCUM Admin\update\obj\Release\update.dll
 C:\Users\Tobi\Documents\C#\SCUM Admin\SCUM Admin\update\obj\Release\update.pdb
+C:\Users\Tobi\Documents\C#\SCUM Admin\SCUM Admin\update\obj\Release\update.csprojAssemblyReference.cache

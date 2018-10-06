@@ -1,18 +1,21 @@
 ﻿using MySql.Data.MySqlClient;
+using MySql.Data;
 using System;
 using System.Drawing;
 using System.Reflection;
 using System.Windows.Forms;
 using update;
+using System.Data;
 
 namespace SCUM_Admin
 {
     public partial class scumAdmin : Form, Updateable
     {
-        ListViewHelper lvh = new ListViewHelper();
         ProcessHandler hndlr = new ProcessHandler();
+        TableData data = new TableData("dontplayalone.de", "scumadmin", "scumadmin", "meY16m&4");
         private Updater updater;
 
+        #region Updater
         public string ApplicationName
         {
             get { return "SCUM Admin"; }
@@ -42,207 +45,56 @@ namespace SCUM_Admin
         {
             get { return this; }
         }
+        #endregion
 
         public scumAdmin()
         {
+            // Init all Components
             InitializeComponent();
+
+            //setSettings
+            tbSteamId.Text = Properties.Settings.Default.steamId64;
+            hideIngameAvailable.Checked = Properties.Settings.Default.hideAvailable;
+            hideIngameSpawnable.Checked = Properties.Settings.Default.hideSpawnable;
+            hideIngameUsable.Checked = Properties.Settings.Default.hideUsable;
+            switchBackToApp.Checked = Properties.Settings.Default.switchBack;
+            setAmountBack.Checked = Properties.Settings.Default.setAmountBack;
+
+            //Check for Updates
             updater = new Updater(this);
             updater.DoUpdate();
+
+            //Populate Tables
+            MySqlConnection connection = data.OpenConnection();
+            TableRanged.DataSource = data.getRangedWeaponData().Tables[0];
+            TableMelee.DataSource = data.getMeleeWeaponData().Tables[0];
+            TableWeaponParts.DataSource = data.getWeaponpartsData().Tables[0];
+            TableAmmo.DataSource = data.getAmmoData().Tables[0];
+            TableHeadGear.DataSource = data.getHeadgearData().Tables[0];
+            TableTops.DataSource = data.getTopsData().Tables[0];
+            TablePants.DataSource = data.getPantsData().Tables[0];
+            TableShoes.DataSource = data.getShoesData().Tables[0];
+            TableBackpacks.DataSource = data.getBackpacksData().Tables[0];
+            TableVests.DataSource = data.getVestsData().Tables[0];
+            TableMiscGear.DataSource = data.getMiscGearData().Tables[0];
+            TableTools.DataSource = data.getToolsData().Tables[0];
+            TableCrafting.DataSource = data.getCraftingData().Tables[0];
+            TableFood.DataSource = data.getFoodData().Tables[0];
+            TableDrinks.DataSource = data.getDrinksData().Tables[0];
+            TableDrugstore.DataSource = data.getDrugstoreData().Tables[0];
+            TableNPC.DataSource = data.getNpcData().Tables[0];
+            TableNpcParts.DataSource = data.getNpcPartseData().Tables[0];
+            TableEnvironment.DataSource = data.getEnvironmentData().Tables[0];
+            TableMisc.DataSource = data.getMiscData().Tables[0];
+            connection.Close();
+
+            //Set Current Version
             VersionLabel.Text = ApplicationAssembly.GetName().Version.ToString();
-        }
-
-        private void spawnButton_Click(object sender, EventArgs e)
-        {
-
-            if (amount.Text.Length > 1)
-            {
-                MessageBox.Show("Please select a numer between 1 and 9!", "Nononononono!");
-                return;
-            }
-
-            if (!hndlr.setForground())
-                return;
-
-            int spawnAamount = Convert.ToInt32(amount.Text);
-            string itemToSpawn = string.Empty;
-            string selectedTab = itemsTab.SelectedTab.Name;
-
-            switch (selectedTab)
-            {
-                case "rangedWeaponsTab":
-                    if (rangedList.SelectedItems.Count != 1)
-                    {
-                        MessageBox.Show("Plase select a row!", "Nononononono!");
-                        break;
-                    }
-                    hndlr.SpawnItem(rangedList.SelectedItems[0].SubItems[rangedList.Columns.Count - 1].Text, spawnAamount);
-                    break;
-                case "meleeWeaponsTab":
-                    if (meleeList.SelectedItems.Count != 1)
-                    {
-                        MessageBox.Show("Plase select a row!", "Nononononono!");
-                        break;
-                    }
-                    hndlr.SpawnItem(meleeList.SelectedItems[0].SubItems[meleeList.Columns.Count - 1].Text, spawnAamount);
-                    break;
-                case "weaponpartsTab":
-                    if (weaponpartsList.SelectedItems.Count != 1)
-                    {
-                        MessageBox.Show("Plase select a row!", "Nononononono!");
-                        break;
-                    }
-                    hndlr.SpawnItem(weaponpartsList.SelectedItems[0].SubItems[weaponpartsList.Columns.Count - 1].Text, spawnAamount);
-                    break;
-                case "ammoTab":
-                    if (ammoList.SelectedItems.Count != 1)
-                    {
-                        MessageBox.Show("Plase select a row!", "Nononononono!");
-                        break;
-                    }
-                    hndlr.SpawnItem(ammoList.SelectedItems[0].SubItems[ammoList.Columns.Count - 1].Text, spawnAamount);
-                    break;
-                case "headgearTab":
-                    if (headgearList.SelectedItems.Count != 1)
-                    {
-                        MessageBox.Show("Plase select a row!", "Nononononono!");
-                        break;
-                    }
-                    hndlr.SpawnItem(headgearList.SelectedItems[0].SubItems[headgearList.Columns.Count - 1].Text, spawnAamount);
-                    break;
-                case "topsTab":
-                    if (topsList.SelectedItems.Count != 1)
-                    {
-                        MessageBox.Show("Plase select a row!", "Nononononono!");
-                        break;
-                    }
-                    hndlr.SpawnItem(topsList.SelectedItems[0].SubItems[topsList.Columns.Count - 1].Text, spawnAamount);
-                    break;
-                case "pantsTab":
-                    if (pantsList.SelectedItems.Count != 1)
-                    {
-                        MessageBox.Show("Plase select a row!", "Nononononono!");
-                        break;
-                    }
-                    hndlr.SpawnItem(pantsList.SelectedItems[0].SubItems[pantsList.Columns.Count - 1].Text, spawnAamount);
-                    break;
-                case "shoesTab":
-                    if (shoesList.SelectedItems.Count != 1)
-                    {
-                        MessageBox.Show("Plase select a row!", "Nononononono!");
-                        break;
-                    }
-                    hndlr.SpawnItem(shoesList.SelectedItems[0].SubItems[shoesList.Columns.Count - 1].Text, spawnAamount);
-                    break;
-                case "backpacksTab":
-                    if (backpacksList.SelectedItems.Count != 1)
-                    {
-                        MessageBox.Show("Plase select a row!", "Nononononono!");
-                        break;
-                    }
-                    hndlr.SpawnItem(backpacksList.SelectedItems[0].SubItems[backpacksList.Columns.Count - 1].Text, spawnAamount);
-                    break;
-                case "vestsTab":
-                    if (vestsList.SelectedItems.Count != 1)
-                    {
-                        MessageBox.Show("Plase select a row!", "Nononononono!");
-                        break;
-                    }
-                    hndlr.SpawnItem(vestsList.SelectedItems[0].SubItems[vestsList.Columns.Count - 1].Text, spawnAamount);
-                    break;
-                case "miscGearTab":
-                    if (miscGearList.SelectedItems.Count != 1)
-                    {
-                        MessageBox.Show("Plase select a row!", "Nononononono!");
-                        break;
-                    }
-                    hndlr.SpawnItem(miscGearList.SelectedItems[0].SubItems[miscGearList.Columns.Count - 1].Text, spawnAamount);
-                    break;
-                case "toolsTab":
-                    if (toolsList.SelectedItems.Count != 1)
-                    {
-                        MessageBox.Show("Plase select a row!", "Nononononono!");
-                        break;
-                    }
-                    hndlr.SpawnItem(toolsList.SelectedItems[0].SubItems[toolsList.Columns.Count - 1].Text, spawnAamount);
-                    break;
-                case "craftingTab":
-                    if (craftingList.SelectedItems.Count != 1)
-                    {
-                        MessageBox.Show("Plase select a row!", "Nononononono!");
-                        break;
-                    }
-                    hndlr.SpawnItem(craftingList.SelectedItems[0].SubItems[craftingList.Columns.Count - 1].Text, spawnAamount);
-                    break;
-                case "foodTab":
-                    if (foodList.SelectedItems.Count != 1)
-                    {
-                        MessageBox.Show("Plase select a row!", "Nononononono!");
-                        break;
-                    }
-                    hndlr.SpawnItem(foodList.SelectedItems[0].SubItems[foodList.Columns.Count - 1].Text, spawnAamount);
-                    break;
-                case "drinkTab":
-                    if (drinksList.SelectedItems.Count != 1)
-                    {
-                        MessageBox.Show("Plase select a row!", "Nononononono!");
-                        break;
-                    }
-                    hndlr.SpawnItem(drinksList.SelectedItems[0].SubItems[drinksList.Columns.Count - 1].Text, spawnAamount);
-                    break;
-                case "drugstoreTab":
-                    if (drugstoreList.SelectedItems.Count != 1)
-                    {
-                        MessageBox.Show("Plase select a row!", "Nononononono!");
-                        break;
-                    }
-                    hndlr.SpawnItem(drugstoreList.SelectedItems[0].SubItems[drugstoreList.Columns.Count - 1].Text, spawnAamount);
-                    break;
-                case "npcTab":
-                    if (npcList.SelectedItems.Count != 1)
-                    {
-                        MessageBox.Show("Plase select a row!", "Nononononono!");
-                        break;
-                    }
-                    hndlr.SpawnNpc(npcList.SelectedItems[0].SubItems[npcList.Columns.Count - 1].Text, spawnAamount);
-                    break;
-                case "npcpartsTab":
-                    if (npcPartsList.SelectedItems.Count != 1)
-                    {
-                        MessageBox.Show("Plase select a row!", "Nononononono!");
-                        break;
-                    }
-                    hndlr.SpawnItem(npcPartsList.SelectedItems[0].SubItems[npcPartsList.Columns.Count - 1].Text, spawnAamount);
-                    break;
-                case "envTab":
-                    if (envList.SelectedItems.Count != 1)
-                    {
-                        MessageBox.Show("Plase select a row!", "Nononononono!");
-                        break;
-                    }
-                    hndlr.SpawnItem(envList.SelectedItems[0].SubItems[envList.Columns.Count - 1].Text, spawnAamount);
-                    break;
-                case "miscTab":
-                    if (miscList.SelectedItems.Count != 1)
-                    {
-                        MessageBox.Show("Plase select a row!", "Nononononono!");
-                        break;
-                    }
-                    hndlr.SpawnItem(miscList.SelectedItems[0].SubItems[miscList.Columns.Count - 1].Text, spawnAamount);
-                    break;
-            }
-        }
-
-        private void amount_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsDigit(e.KeyChar) || e.KeyChar == '0')
-            {
-                e.Handled = true;
-            }
         }
 
         private void steamIdTextBoxt_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if ( steamIdTextBox.Text.Length >= 17 )
+            if ( tbSteamId.Text.Length >= 17 )
             {
                 e.Handled = true;
             }
@@ -250,7 +102,7 @@ namespace SCUM_Admin
 
         private void teleportToLocationButton_Click(object sender, EventArgs e)
         {
-            string steamID = steamIdTextBox.Text;
+            string steamID = tbSteamId.Text;
 
             if (steamID == string.Empty || steamID.Length != 17)
             {
@@ -276,79 +128,291 @@ namespace SCUM_Admin
 
         private void scumAdmin_Load(object sender, EventArgs e)
         {
-            steamIdTextBox.Text = Properties.Settings.Default.steamId64;
-            MySqlConnection mySqlConnection = lvh.OpenSqlConnection();
-
-            lvh.CreateHeader(rangedList, new string[] { "Display Name", "Caliber", "Hands", "Ingame Spawnable", "Ingame Available", "Spawn Name" });
-            lvh.PopulateRagned("ranged", mySqlConnection, rangedList);
-
-            lvh.CreateHeader(meleeList, new string[] { "Display Name", "Caliber", "Hands", "Ingame Spawnable", "Ingame Available", "Spawn Name" });
-            lvh.PopulateRagned("melee", mySqlConnection, meleeList);
-
-            lvh.CreateHeader(weaponpartsList, new string[] { "Display Name", "Ingame Spawnable", "Ingame Available", "Spawn Name" });
-            lvh.PopulateSmallLists("weaponparts", mySqlConnection, weaponpartsList);
-
-            lvh.CreateHeader(ammoList, new string[] { "Display Name", "Caliber", "Amount", "Ingame Spawnable", "Ingame Available", "Spawn Name" });
-            lvh.PopulateAmmo("ammo", mySqlConnection, ammoList);
-
-            lvh.CreateHeader(headgearList, new string[] { "Display Name", "Color", "Cwamouflage", "Ingame Spawnable", "Ingame Available", "Spawn Name" });
-            lvh.PopulateGear("headgear", mySqlConnection, headgearList);
-
-            lvh.CreateHeader(topsList, new string[] { "Display Name", "Color", "Cwamouflage", "Ingame Spawnable", "Ingame Available", "Spawn Name" });
-            lvh.PopulateGear("tops", mySqlConnection, topsList);
-
-            lvh.CreateHeader(pantsList, new string[] { "Display Name", "Color", "Cwamouflage", "Ingame Spawnable", "Ingame Available", "Spawn Name" });
-            lvh.PopulateGear("pants", mySqlConnection, pantsList);
-
-            lvh.CreateHeader(shoesList, new string[] { "Display Name", "Color", "Cwamouflage", "Ingame Spawnable", "Ingame Available", "Spawn Name" });
-            lvh.PopulateGear("shoes", mySqlConnection, shoesList);
-
-            lvh.CreateHeader(backpacksList, new string[] { "Display Name", "Color", "Cwamouflage", "Ingame Spawnable", "Ingame Available", "Spawn Name" });
-            lvh.PopulateGear("backpacks", mySqlConnection, backpacksList);
-
-            lvh.CreateHeader(vestsList, new string[] { "Display Name", "Color", "Cwamouflage", "Ingame Spawnable", "Ingame Available", "Spawn Name" });
-            lvh.PopulateGear("vests", mySqlConnection, vestsList);
-
-            lvh.CreateHeader(miscGearList, new string[] { "Display Name", "Color", "Cwamouflage", "Ingame Spawnable", "Ingame Available", "Spawn Name" });
-            lvh.PopulateGear("miscgear", mySqlConnection, miscGearList);
-
-            lvh.CreateHeader(toolsList, new string[] { "Display Name", "Ingame Spawnable", "Ingame Available", "Spawn Name" });
-            lvh.PopulateSmallLists("tools", mySqlConnection, toolsList);
-
-            lvh.CreateHeader(craftingList, new string[] { "Display Name", "Ingame Spawnable", "Ingame Available", "Spawn Name" });
-            lvh.PopulateSmallLists("crafting", mySqlConnection, craftingList);
-
-            lvh.CreateHeader(foodList, new string[] { "Display Name", "Toxic", "Amount", "Ingame Spawnable", "Ingame Available", "Spawn Name" });
-            lvh.PopulateFood("food", mySqlConnection, foodList);
-
-            lvh.CreateHeader(drinksList, new string[] { "Display Name", "Alcoholic", "Amount", "Ingame Spawnable", "Ingame Available", "Spawn Name" });
-            lvh.PopulateDrinks("drinks", mySqlConnection, drinksList);
-
-            lvh.CreateHeader(drugstoreList, new string[] { "Display Name", "Amount", "Ingame Spawnable", "Ingame Available", "Spawn Name" });
-            lvh.PopulateDrugstore("drugstore", mySqlConnection, drugstoreList);
-
-            lvh.CreateHeader(npcList, new string[] { "Display Name", "Ingame Spawnable", "Ingame Available", "Spawn Name" });
-            lvh.PopulateSmallLists("npcs", mySqlConnection, npcList);
-
-            lvh.CreateHeader(npcPartsList, new string[] { "Display Name", "Ingame Spawnable", "Ingame Available", "Spawn Name" });
-            lvh.PopulateSmallLists("npcparts", mySqlConnection, npcPartsList);
-
-            lvh.CreateHeader(envList, new string[] { "Display Name", "Ingame Spawnable", "Ingame Available", "Spawn Name" });
-            lvh.PopulateSmallLists("environment", mySqlConnection, envList);
-
-            lvh.CreateHeader(miscList, new string[] { "Display Name", "Ingame Spawnable", "Ingame Available", "Spawn Name" });
-            lvh.PopulateSmallLists("misc", mySqlConnection, miscList);
-
-            lvh.CreateHeader(teleportLocationsList, new string[] { "Location Name", "Sector", "x", "y", "z" });
-            lvh.PopulateTeleportLocations("teleport_locations", mySqlConnection, teleportLocationsList);
-
-            lvh.CloseSqlConnection(mySqlConnection);
+            tbSteamId.Text = Properties.Settings.Default.steamId64;
         }
 
         private void scumAdmin_FormClosing(object sender, FormClosingEventArgs e)
         {
-            Properties.Settings.Default.steamId64 = steamIdTextBox.Text;
+            Properties.Settings.Default.steamId64 = tbSteamId.Text;
             Properties.Settings.Default.Save();
         }
+
+        private void amount_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) || ((TextBox)sender).Text.Length >= 2)
+            {
+                e.Handled = true;
+            }
+        }
+
+        #region Reanged Weapons
+        private void btnSpawnRanged_Click(object sender, EventArgs e)
+        {
+            string item = Convert.ToString(TableRanged.Rows[TableRanged.SelectedCells[0].RowIndex].Cells["Spawnname"].Value);
+            int amount = Convert.ToInt32(tbAmountRanged.Text);
+            hndlr.SpawnItem(item, amount);
+            tbAmountRanged.Text = "1";
+        }
+
+        private void tbSearchRanged_KeyUp(object sender, KeyEventArgs e)
+        {
+            TableRanged.DataSource = data.getRangedWeaponData(tbSearchRanged.Text).Tables[0];
+        }
+        #endregion
+
+        #region Melee Weapons
+        private void btnSpawnMelee_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tbSearchMelee_KeyUp(object sender, KeyEventArgs e)
+        {
+            TableMelee.DataSource = data.getMeleeWeaponData(tbSearchMelee.Text).Tables[0];
+        }
+        #endregion
+
+        #region Weaponparts
+        private void btnSpawnWeaponparts_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tbSearchWeaponparts_KeyUp(object sender, KeyEventArgs e)
+        {
+            TableWeaponParts.DataSource = data.getWeaponpartsData(tbSearchWeaponparts.Text).Tables[0];
+        }
+        #endregion
+
+        #region Ammo
+        private void btnSpawnAmmo_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tbSearchAmmo_KeyUp(object sender, KeyEventArgs e)
+        {
+            TableAmmo.DataSource = data.getAmmoData(tbSearchAmmo.Text).Tables[0];
+        }
+        #endregion
+
+        #region Headgear
+        private void btnSpawnHeadgear_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tbSearchHeadgear_KeyUp(object sender, KeyEventArgs e)
+        {
+            TableHeadGear.DataSource = data.getHeadgearData(tbSearchHeadgear.Text).Tables[0];
+        }
+        #endregion
+
+        #region Tops
+        private void btnSpawnTops_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tbSearchTops_KeyUp(object sender, KeyEventArgs e)
+        {
+            TableTops.DataSource = data.getTopsData(tbSearchTops.Text).Tables[0];
+        }
+        #endregion
+
+        #region Pants
+        private void btnSpawnPants_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tbSearchPants_KeyUp(object sender, KeyEventArgs e)
+        {
+            TablePants.DataSource = data.getPantsData(tbSearchPants.Text).Tables[0];
+        }
+        #endregion
+
+        #region Shoes
+        private void btnSpawnShoes_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tbSearchShoes_KeyUp(object sender, KeyEventArgs e)
+        {
+            TableShoes.DataSource = data.getShoesData(tbSearchShoes.Text).Tables[0];
+        }
+        #endregion
+
+        #region Backpacks
+        private void btnSpawnBackpacks_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tbSearchBackpacks_KeyUp(object sender, KeyEventArgs e)
+        {
+            TableBackpacks.DataSource = data.getBackpacksData(tbSearchBackpacks.Text).Tables[0];
+        }
+        #endregion
+
+        #region Vests
+        private void btnSpawnVests_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tbSearchVests_KeyUp(object sender, KeyEventArgs e)
+        {
+            TableVests.DataSource = data.getVestsData(tbSearchVests.Text).Tables[0];
+        }
+        #endregion
+
+        #region Miscgear
+        private void btnSpawnMiscgear_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tbSearchMiscgear_KeyUp(object sender, KeyEventArgs e)
+        {
+            TableMiscGear.DataSource = data.getMiscGearData(tbSearchMiscgear.Text).Tables[0];
+        }
+        #endregion
+
+        #region Tools
+        private void btnSpawnTools_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tbSearchTools_KeyUp(object sender, KeyEventArgs e)
+        {
+            TableTools.DataSource = data.getToolsData(tbSearchTools.Text).Tables[0];
+        }
+        #endregion
+
+        #region Crafting
+        private void btnSpawnCrafting_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tbSearchCrafting_KeyUp(object sender, KeyEventArgs e)
+        {
+            TableCrafting.DataSource = data.getCraftingData(tbSearchCrafting.Text).Tables[0];
+        }
+        #endregion
+
+        #region Food
+        private void Food_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tbSearchFood_KeyUp(object sender, KeyEventArgs e)
+        {
+            TableFood.DataSource = data.getFoodData(tbSearchFood.Text).Tables[0];
+        }
+        #endregion
+
+        #region Drinks
+        private void btnSpawnDrinks_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tbSearchDrinks_KeyUp(object sender, KeyEventArgs e)
+        {
+            TableDrinks.DataSource = data.getDrinksData(tbSearchDrinks.Text).Tables[0];
+        }
+        #endregion
+
+        #region Drugstore
+        private void btnSpawnDrugstore_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tbSearchDrugstore_KeyUp(object sender, KeyEventArgs e)
+        {
+            TableDrugstore.DataSource = data.getDrugstoreData(tbSearchDrugstore.Text).Tables[0];
+        }
+        #endregion
+
+        #region Npc
+        private void btnSpawnNpc_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tbSearchNpc_KeyUp(object sender, KeyEventArgs e)
+        {
+            TableNPC.DataSource = data.getNpcData(tbSearchNpc.Text).Tables[0];
+        }
+        #endregion
+
+        #region Npcparts
+        private void btnSpawnNpcparts_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tbSearchNpcparts_KeyUp(object sender, KeyEventArgs e)
+        {
+            TableNpcParts.DataSource = data.getNpcPartseData(tbSearchNpcparts.Text).Tables[0];
+        }
+        #endregion
+
+        #region Environment
+        private void btnSpawnEnvironment_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tbSearchEnvironment_KeyUp(object sender, KeyEventArgs e)
+        {
+            TableEnvironment.DataSource = data.getEnvironmentData(tbSearchEnvironment.Text).Tables[0];
+        }
+        #endregion
+
+        #region Misc
+        private void btnSpawnMisc_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tbSearchMisc_KeyUp(object sender, KeyEventArgs e)
+        {
+            TableMisc.DataSource = data.getMiscData(tbSearchMisc.Text).Tables[0];
+        }
+        #endregion
+
+        #region Settings
+        private void hideIngameSpawnable_CheckedChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.hideSpawnable = hideIngameSpawnable.Checked;
+        }
+
+        private void hideIngameUsable_CheckedChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.hideUsable = hideIngameSpawnable.Checked;
+        }
+
+        private void hideIngameAvailable_CheckedChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.hideAvailable = hideIngameAvailable.Checked;
+        }
+
+        private void switchBackToApp_CheckedChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.switchBack = switchBackToApp.Checked;
+        }
+
+        private void setAmountBack_CheckedChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.setAmountBack = setAmountBack.Checked;
+        }
+        #endregion
     }
 }

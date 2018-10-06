@@ -11,7 +11,7 @@ namespace SCUM_Admin
         [DllImport("user32.dll")]
         static extern bool SetForegroundWindow(IntPtr hWnd);
 
-        public bool setForground()
+        internal bool setForground()
         {
             Process[] procs = Process.GetProcessesByName("SCUM");
 
@@ -31,8 +31,10 @@ namespace SCUM_Admin
             }
         }
 
-        public void SpawnItem(string item, int amount)
+        internal void SpawnItem(string item, int amount)
         {
+            if (!setForground())
+                return;
             SendKeys.SendWait("t");
             Thread.Sleep(50);
             SendKeys.SendWait("#spawnitem " + item + " " + amount);
@@ -40,8 +42,10 @@ namespace SCUM_Admin
             SendKeys.SendWait("{enter}{escape}");
         }
 
-        public void SpawnNpc(string npc, int amount)
+        internal void SpawnNpc(string npc, int amount)
         {
+            if(!setForground())
+                return;
             SendKeys.SendWait("t");
             Thread.Sleep(50);
             SendKeys.SendWait("#spawncharacter " + npc + " " + amount);
@@ -49,8 +53,10 @@ namespace SCUM_Admin
             SendKeys.SendWait("{enter}{escape}");
         }
 
-        public void Teleport(string steamID, string x, string y, string z)
+        internal void Teleport(string steamID, string x, string y, string z)
         {
+            if(!setForground())
+                return;
             SendKeys.SendWait("t");
             Thread.Sleep(50);
             SendKeys.SendWait("#teleport " + steamID + " " + x + " " + y + " " + z);
